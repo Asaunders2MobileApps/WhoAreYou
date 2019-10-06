@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:WhoAreYou"
+             mc:Ignorable="d"
+             x:Class="WhoAreYou.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:QuestionViewModel/>
+    </ContentPage.BindingContext>
+    
+    <ScrollView>
+        <StackLayout Padding="10, 0, 10, 30">
+
+            <Label Text="Enter 1 - 4 for the following questions"
+               HorizontalOptions="Center"/>
+
+            <Label Text="Question 1"
+               HorizontalOptions="Center" />
+            <Label Text="{Binding Question1}" />
+            <Entry Text="{Binding Score1, Mode=TwoWay}"  Keyboard="Numeric" MaxLength="1"/>
+
+            <Label Text="Question 2"
+               HorizontalOptions="Center" />
+            <Label Text="{Binding Question2}" />
+            <Entry Text="{Binding Score2, Mode=TwoWay}"  Keyboard="Numeric" MaxLength="1"/>
+
+            <Label Text="Question 3"
+               HorizontalOptions="Center" />
+            <Label Text="{Binding Question3}" />
+            <Entry Text="{Binding Score3, Mode=TwoWay}" Keyboard="Numeric" MaxLength="1"/>
+
+            <Label Text="Question 4"
+               HorizontalOptions="Center" />
+            <Label Text="{Binding Question4}" />
+            <Entry Text="{Binding Score4, Mode=TwoWay}" Keyboard="Numeric" MaxLength="1"/>
+
+            <Label Text="Question 5"
+               HorizontalOptions="Center" />
+            <Label Text="{Binding Question5}" />
+            <Entry Text="{Binding Score5, Mode=TwoWay}" Keyboard="Numeric" MaxLength="1"/>
+
+            <Button Text="Find Character" Command="{Binding GetCharacterCommand}"/>
+
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>
