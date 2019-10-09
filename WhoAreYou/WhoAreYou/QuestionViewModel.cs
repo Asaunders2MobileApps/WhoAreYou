@@ -9,9 +9,14 @@ namespace WhoAreYou
 {
     class QuestionViewModel : INotifyPropertyChanged
     {
+        public double totalScore = 0.00;
+        public double score1 = 0, score2 = 0, score3 = 0, score4 = 0, score5 = 0;
+        public string name;
+        private double age = 0;
+        private string character = "";
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private string character = "";
+        
 
         public QuestionViewModel()
         {
@@ -41,20 +46,9 @@ namespace WhoAreYou
             " 3) Well Known" +
             " 4) Hidden";
 
-        public string question4 = "Are you: " +
-            " 1) Versatile" +
-            " 2) Confused" +
-            " 3) Helpful" +
-            " 4) Destructive";
+        public string question4 = "What is your first name?";
 
-        public string question5 = "Are you: " +
-            " 1) Quick" +
-            " 2) Mobile" +
-            " 3) Stationary" +
-            " 4) Guarded";
-
-        public double totalScore = 0.00;
-        public double score1 = 0, score2 = 0, score3 = 0, score4 = 0, score5 = 0;
+        public string question5 = "How old are you?";
 
         public string Question1
         {
@@ -96,7 +90,7 @@ namespace WhoAreYou
         {
             get { return score1; }
             set{
-                if (score1 > 0 && score1 < 5)
+                if (value > 0 && value < 5)
                 {
                     score1 = value;
                     OnPropertyChanged("Score1");
@@ -109,7 +103,7 @@ namespace WhoAreYou
         {
             get { return score2; }
             set{
-                if (score2 > 0 && score2 < 5)
+                if (value > 0 && value < 5)
                 {
                     score2 = value;
                     OnPropertyChanged("Score2");
@@ -123,7 +117,7 @@ namespace WhoAreYou
             get { return score3; }
             set
             {
-                if (score3 > 0 && score3 < 5)
+                if (value > 0 && value < 5)
                 {
                     score3 = value;
                     OnPropertyChanged("Score3");
@@ -132,17 +126,15 @@ namespace WhoAreYou
             }
         }
 
-        public double Score4
+        public string Name
         {
-            get { return score4; }
+            get { return name; }
             set
             {
-                if (score4 > 0 && score4 < 5)
-                {
-                    score4 = value;
+                    name = value;
                     OnPropertyChanged("Score4");
                     OnPropertyChanged("Result");
-                }
+               
             }
         }
 
@@ -151,43 +143,63 @@ namespace WhoAreYou
             get { return score5; }
             set
             {
-                if (score5 > 0 && score5 < 5)
+                if (value <= 20)
                 {
-                    score5 = value;
-                    OnPropertyChanged("Score5");
-                    OnPropertyChanged("Result");
+                    age = 1;
                 }
+                else if (value > 21 && value < 40)
+                {
+                    age = 2;
+                }
+                else if (value <= 40)
+                {
+                    age = 3;
+                }
+                else if (value > 40)
+                {
+                    age = 4;
+                }
+
+                score5 = value;
+
+
+                OnPropertyChanged("Score5");
+                OnPropertyChanged("Result");
+
             }
         }
 
+
         public double Result
         {
-            get { return Score1 + Score2+ Score3 + Score4 + Score5; }
+            get { return Score1 + Score2 + Score3 + Age; }
         }
 
         public Command GetCharacterCommand { get; }
         public string Character { get => character; set => character = value; }
+        public double Age { get => age; set => age = value; }
 
         async Task GetScore()
         {
-            totalScore = Score1 + Score2 + Score3 + Score4 + Score5;
+            totalScore = Score1 + Score2 + Score3 + Age;
+
             if (totalScore < 5)
             {
-                Character = "Ezio, the main assassin and ancestor to desmond. You lead a large group of assassins in your conquest to bring justice to Italy and restore the Assassin's Order. You biggest nemisis is Vivere de Pazzi";
+                Character = "Ezio the main assassin and ancestor to desmond. You lead a large group of assassins in your conquest to bring justice to Italy and restore the Assassin's Order. You biggest nemisis is Vivere de Pazzi";
             }
-            else if (totalScore > 5 && totalScore <= 10)
+            else if (totalScore >= 5 && totalScore <= 6)
             {
-                Character = "Desmond, you are hunted by the templar order and visit your ancestors memories in order to learn how to save the world from being destroyed.";
+                Character = "Desmond you are hunted by the templar order and visit your ancestors memories in order to learn how to save the world from being destroyed.";
             }
-            else if (totalScore > 10 && totalScore <= 15)
+            else if (totalScore > 7 && totalScore <= 11)
             {
                 Character = "Leonardo Da Vinci, you are a gifted inventor and helped Ezio create many of the tools he used to restore order.";
             }
-            else if (totalScore > 15 && totalScore <= 20)
+            else if (totalScore > 12 && totalScore <= 16)
             {
                 Character = "Viere de Pazzi, you want to destroy the Assassin's Order and control the people of Italy.";
             }
-            await Application.Current.MainPage.DisplayAlert("You Are", Character, "OK");
+            await Application.Current.MainPage.DisplayAlert(Name + " You Are", Character, "OK");
         }
     }
 }

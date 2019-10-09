@@ -35,12 +35,14 @@
             <Label Text="Question 4"
                HorizontalOptions="Center" />
             <Label Text="{Binding Question4}" />
-            <Entry Text="{Binding Score4, Mode=TwoWay}" Keyboard="Numeric" MaxLength="1"/>
+            <Entry Text="{Binding Name, Mode=TwoWay}"/>
 
             <Label Text="Question 5"
                HorizontalOptions="Center" />
             <Label Text="{Binding Question5}" />
-            <Entry Text="{Binding Score5, Mode=TwoWay}" Keyboard="Numeric" MaxLength="1"/>
+            <Entry Text="{Binding Score5, Mode=TwoWay}" Keyboard="Numeric"/>
+
+            <Label Text="{Binding Result, Mode=TwoWay}"/>
 
             <Button Text="Find Character" Command="{Binding GetCharacterCommand}"/>
 
